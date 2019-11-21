@@ -1,0 +1,14 @@
+{% extends 'index.html' %} {% block blockname %}
+<h2><i clcontentass="fa fa-question" aria-hidden="true"></i>Sample Questions</h2>
+            {% for each_question in questions %}
+            <form action="#" method="POST">
+                <h1>{{each_question.question}}</h1>
+                        <label class="sr-only" for="question">{{each_question.question}}</label>
+                        <input type="hidden" class="form-control" name="question" id="question" placeholder="">
+                        {% for option in each_question.options %}
+                                <input type="radio" name="" value="{{option}}"><br>
+                        {% endfor %}
+                    <button type="submit" class="btn btn-primary">Action</button>
+                    </form>
+            {% endfor %}
+{% endblock blockname %}

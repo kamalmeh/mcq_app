@@ -1,0 +1,21 @@
+{% extends "index.html" %} {% block blockname %}
+<form action="#" method="POST">
+    {% csrf_token %} {% for question in questions %}
+    <h2>{{question.Question}}</h2>
+    <input type="hidden" name="Question_{{question.id}}" value="{{question.Question}}">
+    <br> {% for option in question.Options %} {% if option == question.UserAnswered %}
+    <input type="radio" name="Answer_{{question.id}}" value="{{option}}" checked> {% else %}
+    <input type="radio" name="Answer_{{question.id}}" value="{{option}}"> {% endif %}
+    <label for="Answer_{{question.id}}">{{option}}</label>
+    <br> {% endfor %} {% if question.CorectAnswer %}
+    <h6>Correct Answer: {{ question.CorectAnswer }}</h6>
+    {% endif %}
+    <br> {% endfor %} {% if score %}
+    <H1>Your Total Score is: {{ score }}</H1>
+    {% else %}
+    <div class="col-lg align-content-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    {% endif %}
+</form>
+{% endblock blockname %}
