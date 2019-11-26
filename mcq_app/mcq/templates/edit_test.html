@@ -1,37 +1,50 @@
-{% extends 'index.html' %} {% block blockname %}
-<form action="#" method="post">
-    {% csrf_token %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <H2><label for="">Test</label></H2>
-                    <select class="custom-select" name="test_name">
+{% extends 'index.html' %} {% block blockname %} {% if test_id %}
+<h2>{{test_name}}</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                {% for question in questions %}
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="{{question.id}}" value="{{question.id}}" {{question.checked}}>
+                                    {{question.Question}}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                                <input type="hidden" name="test_name" value="{{test_id}}">
+                                <button type="submit" class="btn btn-primary" name="submit">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% else %}
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <H2><label for="">Test</label></H2>
+                                <select class="custom-select" name="test_name">
                         <option selected>Select one</option>
                         {% for test in tests %}
-                            {% if test_Id == test.id %}
-                                <option value="{{test.id}}" selected>{{test.Test_Name}}</option>
-                            {% else %}
                                 <option value="{{test.id}}">{{test.Test_Name}}</option>
-                            {% endif %}
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary" name="retrieve">Retrieve</button>
+                                <button type="submit" class="btn btn-primary" name="retrieve">Retrieve</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</form>
-<form action="#" method="post">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {% for question in questions %} {% endfor %}
-                    <button type="submit" class="btn btn-primary" name="submit">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-{% endblock blockname %}
+</div>
+{% endif %} {% endblock blockname %}

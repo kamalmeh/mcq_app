@@ -34,7 +34,7 @@ def create_test_view(request):
         new_record.save()
         test_questions = TestQuestion(test_Id=new_record, test_Question=q_list_checked)
         test_questions.save()
-        return render(request, 'redirect.html', context={'url':'admin_view.html'})
+        return render(request, 'redirect.html', context={'url':'admin_view'})
 
 def edit_test_view(request):
     tests = Test.objects.values()
@@ -43,14 +43,35 @@ def edit_test_view(request):
         return render(request, 'edit_test.html', context)
     elif request.method=='POST':
         test_id = int(request.POST['test_name'])
-        test_questions = TestQuestion.objects.filter(test_Id_id=test_id).values()
-        all_questions = Question.objects.values()
-        context = {'test_id': test_id, 'tests': tests, 'test_questions': test_questions, 'questions': all_questions}
+        test_data = Test.objects.filter(id=test_id).values()[0]
+        test_name = test_data['Test_Name']
+        test_questions_id = TestQuestion.objects.filter(test_Id_id=test_id).values()[0]
+        questions = Question.objects.values()
+        new_questions = []
+        temp_q = {}
+        for question in questions:
+            temp_q = question.copy()
+            for item in test_questions_id['test_Question'].split(','):
+                if question['id'] == int(item):
+                    temp_q['checked'] = 'checked'
+                    break
+            new_questions.append(temp_q)
+
+        context = {'test_id': test_id, 'test_name': test_name, 'questions': new_questions}
         if "retrieve" in request.POST:
-            return render(request, 'edit_test.html', context={'url':'admin_view.html'})
-        else :
-            return render(request, 'redirect.html', context={'url':'admin_view.html'})
-    # return render(request, 'redirect.html', context={'url':'admin_view.html'})
+            return render(request, 'edit_test.html', context)
+        elif "submit" in request.POST:
+            q_list_checked = ""
+            for question in questions:
+                if str(question['id']) in request.POST:
+                    if q_list_checked == "":
+                        q_list_checked = str(question['id'])
+                    else :
+                        q_list_checked = q_list_checked + "," + str(question['id'])
+            test_data = TestQuestion.objects.get(test_Id_id=test_id)
+            test_data.test_Question=q_list_checked
+            test_data.save()
+            return render(request, 'redirect.html', context={'url':'admin_view'})
 
 def admin_view(request):
     return render(request, 'admin.html', {})
