@@ -1,10 +1,11 @@
-{% extends "index.html" %} {% block blockname %}
+{% extends "index.html" %} {% block blockname %} {% if questions %}
 <form action="#" method="POST">
-    {% csrf_token %} {% for question in questions %}
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{id}}"> {% for question in questions %}
     <h2>{{question.Question}}</h2>
     <input type="hidden" name="Question_{{question.id}}" value="{{question.Question}}">
     <br> {% for option in question.Options %} {% if option == question.UserAnswered %}
-    <input type="radio" name="Answer_{{question.id}}" value="{{option}}" checked> {% else %}
+    <input type="radio" name="Answer_{{question.id}}" value="{{option}}" checked disabled> {% else %}
     <input type="radio" name="Answer_{{question.id}}" value="{{option}}"> {% endif %}
     <label for="Answer_{{question.id}}">{{option}}</label>
     <br> {% endfor %} {% if question.CorectAnswer %}
@@ -18,4 +19,6 @@
     </div>
     {% endif %}
 </form>
-{% endblock blockname %}
+{% else %}
+<h2>Invalid test or There are no questions for this test</h2>
+{% endif %} {% endblock blockname %}

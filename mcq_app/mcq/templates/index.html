@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="{% static 'mcq_assets/assets/css/style.css' %}">
     <title>Home - MCQ Project</title>
+    {% block redirect_meta %} {% endblock redirect_meta %}
 </head>
 
 <body>
@@ -17,12 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-1-12">
-                <h1>Welcome {{test}} to my Sample MCQ Application!!</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-1-12">
-                {% block blockname %} content {% endblock blockname %}
+                {% block blockname %} {% endblock blockname %}
             </div>
         </div>
     </div>

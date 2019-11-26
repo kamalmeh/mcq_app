@@ -1,0 +1,37 @@
+{% extends 'index.html' %} {% block blockname %}
+<form action="#" method="post">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <H2><label for="">Test</label></H2>
+                    <select class="custom-select" name="test_name">
+                        <option selected>Select one</option>
+                        {% for test in tests %}
+                            {% if test_Id == test.id %}
+                                <option value="{{test.id}}" selected>{{test.Test_Name}}</option>
+                            {% else %}
+                                <option value="{{test.id}}">{{test.Test_Name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary" name="retrieve">Retrieve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="#" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {% for question in questions %} {% endfor %}
+                    <button type="submit" class="btn btn-primary" name="submit">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock blockname %}

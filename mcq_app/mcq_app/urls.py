@@ -19,7 +19,10 @@ from django.urls import path
 from mcq import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
+    path('admin_view/', views.admin_view, name="admin"),
+    path('create_test', views.create_test_view, name='test creation'),
+    path('edit_test', views.edit_test_view, name='edit test'),
     path('test', views.test_view, name='test'),
     path('', views.home_view, name='home'),
 ]
