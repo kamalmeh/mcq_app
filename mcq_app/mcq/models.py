@@ -27,9 +27,9 @@ class Question(models.Model):
 #Question Id is inbuilt
     Category    = models.ForeignKey(Category, null=True, blank=True, verbose_name="Category", on_delete=models.CASCADE)
     Question    = models.TextField(blank=False, null=False)
-    Answer      = models.CharField(blank=False, null=False, max_length=255)
+    Answer      = models.CharField(blank=False, null=False, max_length=255, help_text="Answer is matched literally, any single character difference will result in mismatch")
 #We can change to models.ListCharField() in django_mysql.models. We can use new line character for separating four options, temporarily in sqlite
-    Options     = models.TextField(blank=False, null=False)
+    Options     = models.TextField(blank=False, null=False, help_text="Line Feed/New Line separated Options")
     Weight      = models.IntegerField(default=1, null=True)
 
     class Meta:
@@ -43,7 +43,7 @@ class Question(models.Model):
 class Test(models.Model):
 #Test Id is inbuilt
     Category_Id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    Test_Name   = models.CharField(null=False, blank=False, max_length=255, default="Provide Test Name")
+    Test_Name   = models.CharField(null=False, blank=False, max_length=255, default="Provide Test Name", unique=True)
     Test_Description = models.TextField(default="")
 
     class Meta:
@@ -82,3 +82,23 @@ class TestQuestion(models.Model):
             if test_id == testQuestion['test_Id_id']:
                 question_list = testQuestion['test_Question'].split(',')
         return question_list
+
+class Status(models.Model):
+    Status_Name = models.CharField(null=False, blank=False, unique=True, max_length=255, default="Not Started")
+
+class User(models.Model):
+    FirstName = models.CharField(null=False, blank=False, max_length=255, default="First Name")
+    LastName = models.CharField(null=False, blank=False, max_length=255, default="Last Name")
+    Email = models.EmailField(null=False, blank=False, max_length=255, primary_key=True, default="Email", verbose_name="Email")
+    # Test_Id = models.ForeignKey(Test, on_delete=models.CASCADE, verbose_name="Test ID", default=1)
+
+    # class Meta:
+    #     unique_together = (('Email','Test_Id'),)
+
+class Attempt(models.Model):
+    User_Email = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="User")
+    Test_Id = models.ForeignKey(Test, on_delete=models.CASCADE, verbose_name="Test ID")
+    Total = models.IntegerField(default=0, verbose_name="Total")
+    Score   = models.IntegerField(default=0, verbose_name="Score")
+    Timestamp = models.DateTimeField(verbose_name="Test Attempt Date & Time", auto_now_add=True)
+    Test_Status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, to_field='Status_Name')

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     #App Modules
     'mcq',
     #Third-party apps
-
+    'django_tables2',
 ]
 
 MIDDLEWARE = [

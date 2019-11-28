@@ -4,6 +4,7 @@ $ python --version
 Python 3.7.4
 
 $ pip install django_mysql
+$ pip install django-tables2
 
 Development Environment Setup
 -----------------------------------------

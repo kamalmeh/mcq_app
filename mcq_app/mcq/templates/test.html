@@ -1,24 +1,46 @@
-{% extends "index.html" %} {% block blockname %} {% if questions %}
-<form action="#" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="id" value="{{id}}"> {% for question in questions %}
-    <h2>{{question.Question}}</h2>
-    <input type="hidden" name="Question_{{question.id}}" value="{{question.Question}}">
-    <br> {% for option in question.Options %} {% if option == question.UserAnswered %}
-    <input type="radio" name="Answer_{{question.id}}" value="{{option}}" checked disabled> {% else %}
-    <input type="radio" name="Answer_{{question.id}}" value="{{option}}"> {% endif %}
-    <label for="Answer_{{question.id}}">{{option}}</label>
-    <br> {% endfor %} {% if question.CorectAnswer %}
-    <h6>Correct Answer: {{ question.CorectAnswer }}</h6>
-    {% endif %}
-    <br> {% endfor %} {% if score %}
-    <H1>Your Total Score is: {{ score }}</H1>
-    {% else %}
-    <div class="col-lg align-content-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+{% extends "index.html" %} {% block blockname %} {% load django_tables2 %} {% if attempt_data %} {% render_table attempt_data %} {% endif %} {% if message %}
+<h2>{{message}}</h2>
+<a href="/assign_test" target="" rel="noopener noreferrer">Assign Test</a> {% else %}
+<div class="row">
+    <div class="col-xs-1-12">
+
     </div>
-    {% endif %}
-</form>
+</div>
+<div class="row">
+    <div class="col-xs-1-12">
+
+    </div>
+</div>
+{% if questions %}
+<div class="row">
+    <div class="col">
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{id}}"> {% for question in questions %}
+            <h2>{{question.Question}}</h2>
+            <input type="hidden" name="Question_{{question.id}}" value="{{question.Question}}">
+            <input type="hidden" name="id" value="{{test_id}}">
+            <input type="hidden" name="user" value="{{user}}">
+            <br> {% for option in question.Options %} {% if option == question.UserAnswered %}
+            <input type="radio" name="Answer_{{question.id}}" value="{{option}}" checked disabled> {% else %}
+            <input type="radio" name="Answer_{{question.id}}" value="{{option}}"> {% endif %}
+            <label for="Answer_{{question.id}}">{{option}}</label>
+            <br> {% endfor %} {% if question.CorectAnswer %}
+            <h6>Correct Answer: {{ question.CorectAnswer }}</h6>
+            {% endif %}
+            <br> {% endfor %} {% if score %}
+            <H1>Your Total Score is: {{ score }}</H1>
+            {% else %}
+            <div class="col-lg align-content-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% else %} {% if score %}
+<H1>Your Latest Score is: {{ score }}/{{ total }}</H1>
 {% else %}
-<h2>Invalid test or There are no questions for this test</h2>
-{% endif %} {% endblock blockname %}
+<h2>Invalid test or There are no questions for this user</h2>
+{% endif%}
+<a href="/create_test" target="" rel="noopener noreferrer">Create Test</a> {% endif %} {% endif %} {% endblock blockname %}

@@ -1,0 +1,11 @@
+{% extends "index.html" %} {% block blockname %}
+<h2>All Available Tests</h2>
+{% if tests %}
+<ul>
+    {% for test in tests %}
+    <li>{{test.Test_Name}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<h2>There are no tests available</h2>
+{% endif %} {% endblock blockname %}

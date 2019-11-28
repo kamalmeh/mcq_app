@@ -1,0 +1,20 @@
+{% extends 'index.html' %} {% block blockname %}
+<div class="container">
+    <div class="form-group row">
+        <div class="col">
+            <form method="post">
+                {% csrf_token %} {{ form }} {% for test in tests %}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="{{test.id}}" value="{{test.id}}">
+                        {{test.Test_Name}}
+                        </label>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <a href="add_user" rel="noopener noreferrer">Add New User</a>
+        </div>
+    </div>
+</div>
+{% endblock blockname %}

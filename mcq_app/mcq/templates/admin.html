@@ -10,10 +10,51 @@
     <li>
         <a href="/delete_test" target="" rel="noopener noreferrer">Delete Test</a>
     </li>
-    <li>All Tests</li>
-    <li>a question for a particular test</li>
-    <li>edit a question for a particular test</li>
-    <li>delete a question for a particular test</li>
-    <li>list all questions for a particular test</li>
+    <li>
+        <a href="/all_tests" target="" rel="noopener noreferrer">All Tests</a>
+    </li>
+    <li>
+        <a href="/add_question" target="" rel="noopener noreferrer">Add Question to Question Bank</a>
+    </li>
+    <li>
+        <a href="/edit_question" target="" rel="noopener noreferrer">Edit Question to Question Bank</a>
+    </li>
+    <li>
+        <a href="/assign_test" target="" rel="noopener noreferrer">Assign Test</a>
+    </li>
+    <li>
+        Create a question for a particular test
+        <Ul>
+            <li>
+                Already Satisfied in <a href="/create_test" target="" rel="noopener noreferrer">Create Test</a>. If we create different set of question for each of test, it may increase data redundancy might result in a performance issues in future and
+                has the maintenance issues.
+            </li>
+        </Ul>
+    </li>
+    <li>
+        Edit a question for a particular test
+        <Ul>
+            <li>
+                Clarification Required. If the question itself need to be modified, then it can be done from the Question Bank Edit Screen to be implemented. However, we have
+                <a href="../admin/" target="_blank" rel="noopener noreferrer">Django Admin</a> interface as of now to add/edit/delete questions.
+            </li>
+        </Ul>
+    </li>
+    <li>
+        Delete a question for a particular test
+        <Ul>
+            <li>
+                This requirement is already satisfied in <a href="/edit_test" target="" rel="noopener noreferrer">Edit Test</a> where we can add/remove questions to/from tests.
+            </li>
+        </Ul>
+    </li>
+    <li>
+        List all questions for a particular test
+        <Ul>
+            <li>
+                This requirement is already satisfied in <a href="/all_tests" target="" rel="noopener noreferrer">All Tests</a> where we can add/remove questions to/from tests.
+            </li>
+        </Ul>
+    </li>
 </ul>
 {% endblock blockname %}

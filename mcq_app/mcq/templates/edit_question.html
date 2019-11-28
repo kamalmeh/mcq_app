@@ -1,0 +1,39 @@
+{% extends "index.html" %} {% block blockname %}
+<h2>Correct The Question Details</h2>
+{% if form %}
+<form method="post">
+    {% csrf_token %} {% for field in form %}
+    <div class="row">
+        <div class="col-lg-2">
+            {{ field.label_tag }}{{ field.errors }}
+        </div>
+        <div class="col pull-left">
+            {{ field }}{% if field.help_text %}
+            <div class="row">
+                <div class="col">
+                    <i style="color: brown;font-weight: bold">*Note: </i>
+                    <i style="color: brown;">{{ field.help_text }}</i>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br> {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% else %} {% for question in questions %}
+<table class="table">
+    <tr>
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <td>
+                {{question.Question}}
+            </td>
+            <input type="hidden" class="form-control" value="{{question.Question}}" name="question">
+            <td>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </td>
+        </form>
+    </tr>
+</table>
+{% endfor %} {% endif %} {% endblock blockname %}

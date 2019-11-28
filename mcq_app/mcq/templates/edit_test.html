@@ -1,4 +1,6 @@
-{% extends 'index.html' %} {% block blockname %} {% if test_id %}
+{% extends 'index.html' %} {% block blockname %} {% if message %}
+<h2>{{ message }}</h2>
+{% endif %} {% if test_id %}
 <h2>{{test_name}}</h2>
 <div class="container-fluid">
     <div class="row">
@@ -17,6 +19,7 @@
                                     </label>
                                 </div>
                                 {% endfor %}
+                                <a href="add_question" rel="noopener noreferrer">Create New Question</a>
                                 <input type="hidden" name="test_name" value="{{test_id}}">
                                 <button type="submit" class="btn btn-primary" name="submit">Update</button>
                             </div>
@@ -33,11 +36,11 @@
                             <div class="form-group">
                                 <H2><label for="">Test</label></H2>
                                 <select class="custom-select" name="test_name">
-                        <option selected>Select one</option>
-                        {% for test in tests %}
-                                <option value="{{test.id}}">{{test.Test_Name}}</option>
-                        {% endfor %}
-                    </select>
+                                    <option selected value="0">Select one</option>
+                                    {% for test in tests %}
+                                        <option value="{{test.id}}">{{test.Test_Name}}</option>
+                                    {% endfor %}
+                                </select>
                                 <button type="submit" class="btn btn-primary" name="retrieve">Retrieve</button>
                             </div>
                         </div>

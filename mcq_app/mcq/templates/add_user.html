@@ -1,0 +1,12 @@
+{% extends 'index.html' %} {% block blockname %}
+<div class="container">
+    <div class="form-group row">
+        <div class="col">
+            <form method="post">
+                {% csrf_token %} {{ form }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock blockname %}

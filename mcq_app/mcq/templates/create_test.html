@@ -6,10 +6,11 @@
         <h2><label for="category">Test Category</label></h2>
         <select class="custom-select" name="category" id="category">
                 <option selected>Select one</option>
-            {% for category in categories %}
-                <option value="{{category.id}}">{{category.Category}}</option>
-            {% endfor %}
+                {% for category in categories %}
+                    <option value="{{category.id}}">{{category.Category}}</option>
+                {% endfor %}
         </select>
+        <a href="add_category" rel="noopener noreferrer">Create New Category</a>
 
         <h2><label for="test_name">Test Name</label></h2>
         <input type="text" class="form-control" name="test_name" id="test_name">
@@ -22,11 +23,12 @@
             {% for question in questions %}
             <div class="form-check">
                 <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" name="{{question.id}}" value="{{question.id}}">
-            {{question.Question}}
-          </label>
+                    <input type="checkbox" class="form-check-input" name="{{question.id}}" value="{{question.id}}">
+                    {{question.Question}}
+                </label>
             </div>
             {% endfor %}
+            <a href="add_question" rel="noopener noreferrer">Create New Question</a>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>

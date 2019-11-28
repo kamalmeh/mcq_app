@@ -1,0 +1,23 @@
+{% extends 'index.html' %} {% block blockname %}
+<h2>Enter The Question Details</h2>
+<form method="post">
+    {% csrf_token %} {% for field in form %}
+    <div class="row">
+        <div class="col-lg-2">
+            {{ field.label_tag }}{{ field.errors }}
+        </div>
+        <div class="col pull-left">
+            {{ field }}{% if field.help_text %}
+            <div class="row">
+                <div class="col">
+                    <i style="color: brown;font-weight: bold">*Note: </i>
+                    <i style="color: brown;">{{ field.help_text }}</i>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br> {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock blockname %}
