@@ -7,32 +7,34 @@ $ pip install django_mysql
 
 $ pip install django-tables2
 
-Development Environment Setup
+Setup
 -----------------------------------------
-1. Create the project Directory
+1. Clone the repository using git clone
 ---------------------------------------
-	mkdir MCQProject
-2. Change to the newly created directory
----------------------------------------
-	cd MCQProject
-3. Prepare for virtual environment
----------------------------------------
-	pip install virtualenv
-4. Create Virtual Environment
----------------------------------------
-	virtualenv virtualenv
-5. Install Django in virtual environment
----------------------------------------
-	pip install django
-6. Start new project
----------------------------------------
-	django-admin.py startproject mcq_app
-7. Change to mcq_app Directory
+	git clone https://github.com/kamalmeh/mcq_app.git
+
+2. Change Directory to mcq_app
 ---------------------------------------
 	cd mcq_app
-8. Make Migrations (For Database. Default SQLite and Can be changed from mcq_app/settings.py)
+
+3. In windows git-bash or linux bash, execute below to activate virtual environment
 ---------------------------------------
-	python manage.py migrate
-9. Try running the app to check if setup till now is correct.
+	Windows
+	-----------
+	virtualenv/Scripts/activate.bat
+	
+	Git-Bash
+	-----------
+	source ./virtualenv/Scripts/activate	
+
+	Linux
+	-----------
+	source ./virtualenv/Scripts/activate
+
+4. Change directory to mcq_app(directory with same name)
+---------------------------------------
+	cd mcq_app/
+
+5. Run the web app using below server
 ---------------------------------------
 	python manage.py runserver
