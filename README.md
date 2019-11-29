@@ -1,7 +1,8 @@
 System Requirements
 -----------------------------------------
-$ python --version
-Python 3.7.4
+App is developed using Python 3.7.4
+
+You can experiment any python version to check if it's working.
 
 $ pip install django_mysql
 
