@@ -1,9 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="row" style="width: 100%;align-items: center;">
-            <div class="col-xl-1-12" style="width: 100%;align-items: center;text-align: center;color: aliceblue;">
-                <h1>Welcome!!</h1>
-            </div>
-        </div>
+    <a class="navbar-brand" href="#">MCQ Application</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item {% if active_tab == 'home' %} active{% endif %}">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% if active_tab == 'admin' %} active{% endif %}">
+                <a class="nav-link" href="admin_view">Admin</a>
+            </li>
+            <li class="nav-item {% if active_tab == 'test' %} active{% endif %}">
+                <a class="nav-link" href="test">Student</a>
+            </li>
+            <li class="nav-item {% if active_tab == 'master' %} active{% endif %}">
+                <a class="nav-link disabled" href="admin">Master Admin Login</a>
+            </li>
+        </ul>
     </div>
+    <form class="form-inline" method="GET" action="search">
+        <input class="form-control mr-sm-2" type="search" name="search_text" placeholder="Search" aria-label="Search">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Submit</button>
+    </form>
 </nav>

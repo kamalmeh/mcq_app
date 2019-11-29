@@ -18,6 +18,7 @@
             {% endif %}
         </div>
     </div>
+    <input type="hidden" name='id' value="{{id}}">
     <br> {% endfor %}
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -29,7 +30,7 @@
             <td>
                 {{question.Question}}
             </td>
-            <input type="hidden" class="form-control" value="{{question.Question}}" name="question">
+            <input type="hidden" class="form-control" value="{{question.id}}" name="question_id">
             <td>
                 <button type="submit" class="btn btn-primary">Edit</button>
             </td>

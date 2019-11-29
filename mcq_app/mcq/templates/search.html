@@ -1,0 +1,9 @@
+{% extends "index.html" %} {% block navbar %} {% include "navbar.html" with active_tab='home'%} {% endblock navbar %} {% block blockname %} {% if message %}
+<h2>{{message}}</h2>
+{% endif %} {% if available_tests %}
+<h1>Available Tests for Search Technologies</h1>
+{% for test in available_tests %}
+<a href="{{test.url}}" target="_blank" rel="noopener noreferrer">{{test.name}}</a><br> {% endfor %} {% else %}
+<h3>No result</h3>
+{% endif %} {% if url %}
+<i>{{url}}</i> {% endif %} {% endblock blockname %}

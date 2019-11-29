@@ -43,7 +43,7 @@ class Question(models.Model):
 class Test(models.Model):
 #Test Id is inbuilt
     Category_Id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    Test_Name   = models.CharField(null=False, blank=False, max_length=255, default="Provide Test Name", unique=True)
+    Test_Name   = models.CharField(null=False, blank=False, max_length=255, default="Provide Test Name", unique=True, help_text="Test Name must be unique")
     Test_Description = models.TextField(default="")
 
     class Meta:

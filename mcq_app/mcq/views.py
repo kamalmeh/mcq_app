@@ -10,22 +10,17 @@ from .forms import CategoryForm, QuestionForm, UserForm, UserAttemptForm
 from .tables import AttemptTable
 
 def create_test_view(request):
-    category = Category()
-    categories = category.get_all_categories()
-
-    test = Test()
-    tests = test.get_all_tests()
-
-    questionsObject = Question()
-    questions = questionsObject.get_test_questions_as_list()
-
-    q_list = get_context_questions(questions)
-
+    categories = Category.objects.values()
+    tests = Test.objects.values()
+    questions = Question.objects.values()
+    q_list = get_context_questions(questions) #This is done to remove the ^M character and separate the Options list
     context = {'categories': categories, 'tests' : tests, 'questions': q_list}
-
+#Check if URL is called using GET or POST Method
     if request.method=='GET':
+        #If GET Method, send the template with question selection data
         return render(request, 'create_test.html', context)
     elif request.method=='POST':
+        #if POST Method, Parse the submited form data and save the question data to db
         q_list_checked = ""
         for question in questions:
             if str(question['id']) in request.POST:
@@ -172,16 +167,32 @@ def edit_question_view(request):
         context = { 'questions': questions }
         return render(request, 'edit_question.html', context)
     elif request.method == 'POST':
-        if 'question' in request.POST:
-            question = Question.objects.get(Question=request.POST['question'])
+        q_id = None
+        if 'question_id' in request.POST:
+            question = Question.objects.get(id=request.POST['question_id'])
+            q_id = question.id
             question_form = QuestionForm(instance=question)
         else :
-            question = Question.objects.get(Question=request.POST['Question'])
+            question = Question.objects.get(id=request.POST['id'])
             question_form = QuestionForm(request.POST, instance=question)
             if question_form.is_valid():
                 question_form.save()
                 return render(request, 'redirect.html', {'url': 'admin_view'})
-    return render(request, 'edit_question.html', {'form': question_form})
+    return render(request, 'edit_question.html', {'form': question_form, 'id': q_id})
+
+def search_view(request):
+    import re
+    search_words = None
+    available_tests = []
+    if 'search_text' in request.GET:
+        search_words = request.GET['search_text']
+    for word in re.findall(r"[\w']+", search_words):
+        tests = Test.objects.filter(Test_Name__icontains=word).values()
+        for test in tests:
+            url = request.scheme + "://" + request.get_host() + "/test?user=<your email>&id=" + str(test['id'])
+            annonymous = {'url': url, 'name': test['Test_Name']}
+            available_tests.append(annonymous)
+    return render(request, 'search.html', { 'available_tests': available_tests })
 
 def admin_view(request):
     return render(request, 'admin.html', {})

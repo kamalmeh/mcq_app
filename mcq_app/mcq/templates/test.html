@@ -1,6 +1,10 @@
-{% extends "index.html" %} {% block blockname %} {% load django_tables2 %} {% if attempt_data %} {% render_table attempt_data %} {% endif %} {% if message %}
-<h2>{{message}}</h2>
-<a href="/assign_test" target="" rel="noopener noreferrer">Assign Test</a> {% else %}
+{% extends "index.html" %} {% block navbar %} {% include "navbar.html" with active_tab='test'%} {% endblock navbar %}
+<br> {% block blockname %} {% load django_tables2 %} {% if attempt_data %}
+<h2>Test Attempts History</h2>
+{% render_table attempt_data %}
+<br>{% endif %}
+<br>{% if message %}
+<h2>{{message}}</h2>Contact administrator to assign you the test. Then after you will be able to attempt the test unlimited times. {% else %}
 <div class="row">
     <div class="col-xs-1-12">
 
