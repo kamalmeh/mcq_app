@@ -23,18 +23,17 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% else %} {% for question in questions %}
-<table class="table">
-    <tr>
-        <form action="#" method="POST">
-            {% csrf_token %}
-            <td>
+<form class="form-inline">
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-8">
                 {{question.Question}}
-            </td>
-            <input type="hidden" class="form-control" value="{{question.id}}" name="question_id">
-            <td>
+                <input type="hidden" class="form-control" value="{{question.id}}" name="question_id">
+            </div>
+            <div class="col-4">
                 <button type="submit" class="btn btn-primary">Edit</button>
-            </td>
-        </form>
-    </tr>
-</table>
-{% endfor %} {% endif %} {% endblock blockname %}
+            </div>
+        </div>
+    </div>
+</form>
+<br> {% endfor %} {% endif %} {% endblock blockname %}
