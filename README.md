@@ -22,7 +22,8 @@ Setup
 ---------------------------------------
 	Windows
 	-----------
-	virtualenv/Scripts/activate.bat
+	cd virtualenv/Scripts/
+	activate.bat
 	
 	Git-Bash
 	-----------
