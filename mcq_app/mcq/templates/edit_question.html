@@ -23,7 +23,8 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% else %} {% for question in questions %}
-<form class="form-inline">
+<form class="form-inline" action="#" method="POST">
+    {% csrf_token %}
     <div class="container">
         <div class="form-group row">
             <div class="col-8">
